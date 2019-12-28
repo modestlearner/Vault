@@ -2,15 +2,18 @@
   "name": "vault",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "config": "^3.2.4",
+    "bcrypt": "^3.0.7",
     "express": "^4.17.1",
-    "mongoose": "^5.8.3"
+    "express-validator": "^6.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.3",
+    "otplib": "^11.0.1"
   }
 }
