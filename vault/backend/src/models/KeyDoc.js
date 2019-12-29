@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const KeySchema = new mongoose.Schema({
-    key:{
+    encryptionkey:{
         type:String,
         unique:true,
         required:true

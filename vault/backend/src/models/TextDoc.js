@@ -3,21 +3,22 @@ const mongoose = require('mongoose')
 const TextSchema = new mongoose.Schema({
     secret:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'keydoc'
+        ref:'keydoc',
     },
-    plainTextCombined:{
+    encrypted:{
         type:String,
-        required:true,
-
+        unique:true
     },
     property:{
         type:String,
-        unique:true,
         required:true
     },
-    clients:{
+    owner:{
         type:String,
-        unique:true,
+        required:true
+    },
+    machines:{
+        type:[String],
         required:true
     },
     date:{
