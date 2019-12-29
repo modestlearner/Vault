@@ -7,29 +7,31 @@ let key1 = null, key2 = null
 let sa = false, db = false, unseal = false
 
 router.post('/',async function(req,res){
+    let msg=""
     try{
         if(req.body.key1!=undefined && key1==null){
             key1 = req.body.key1
             sa = true
-            return res.json({msg:"SA team has entered the key",unlock:false})
+            msg="SA team has entered the key"
         }
         if(req.body.key2!=undefined && key2==null){
             key2 = req.body.key2
             db = true
-            return res.json({msg:"DB team has entered the key",unlock:false})
+            msg = "DB team has entered the key"
         }
         if(key1!=null && key2!=null){
             let combinedText = key1+key2
             console.log(combinedText)
             if(combinedText=='harshitjain'){
                 unseal = true
-                return res.json({msg:"Correct keys",unlock:true})
+                msg="Correct keys"
             }else{
                 sa=false, db=false, unseal = false
                 key1=null, key2=null
-                return res.status(403).json({err:"Keys Mismatch",status:403,unlock:false})
+                return res.status(403).json({err:"Keys Mismatch",status:403,unseal})
             }
         }
+        return res.json({msg,unseal})
     }catch(err){
         console.log(err)
         res.status(503).json({err:"Server error",status:503})

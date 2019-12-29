@@ -69,7 +69,32 @@ router.post('/signin',async function(req,res){
             }
             return res.json({token:token})
         })
+    }catch(err){
+        console.log(err)
+        res.status(503).json({err:"Server error",status:503})
     }
+})
+
+router.post('/signin/demo',async function(req,res){
+    const {username,email,password} = req.body
+
+    try{
+        const payload = {
+            username,
+            email
+        }
+        jwt.sign(payload,config.dev.jwtSecret,{expiresIn:'7d'},function(err,token){
+            if(err){
+                throw err
+            }
+            return res.json({token:token})
+        })
+    }catch(err){
+        console.log(err)
+        res.status(503).json({err:"Server error",status:503})
+    }
+
+
 })
 
 module.exports = router
