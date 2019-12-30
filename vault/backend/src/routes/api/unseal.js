@@ -3,8 +3,6 @@ const crypto = require('crypto')
 
 const router = express.Router()
 
-let key1 = null, key2 = null 
-let sa = false, db = false, unseal = false
 
 router.post('/',async function(req,res){
     let msg=""

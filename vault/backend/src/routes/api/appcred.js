@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 
 
 const jwtVerify = require('../../middleware/jwtverify')
+const vaultStatus = require('../../middleware/vaultStatus')
 const TextDoc = require('../../models/TextDoc')
 const KeyDoc = require('../../models/KeyDoc')
 const config = require('../../configurations/config')
@@ -25,7 +26,7 @@ const decrypt = function(cipher,key){
 
 }
 
-router.post('/gen',jwtVerify,async function(req, res) {
+router.post('/gen',[jwtVerify,vaultStatus],async function(req, res) {
 	const { credentials, owner, property } = req.body
 	let machines = req.body.machines.split(',')
     let encryptKey = await shortid.generate()
@@ -77,7 +78,7 @@ router.post('/gen',jwtVerify,async function(req, res) {
 	}
 })
 
-router.post('/update',jwtVerify,async function(req,res){
+router.post('/update',[jwtVerify,vaultStatus],async function(req,res){
 	const secretKey = req.body.secretKey
 	if (!mongoose.Types.ObjectId.isValid(secretKey)){
 		return res.status(403).json({err:"Invalid key",status:403})
