@@ -2,6 +2,8 @@ const shortid = require('shortid')
 const express = require('express')
 const router = express.Router()
 const crypto = require('crypto')
+const mongoose = require('mongoose')
+
 
 const jwtVerify = require('../../middleware/jwtverify')
 const TextDoc = require('../../models/TextDoc')
@@ -9,10 +11,18 @@ const KeyDoc = require('../../models/KeyDoc')
 const config = require('../../configurations/config')
 
 const encrypt = function(text, key) {
-	var cipher = crypto.createCipher(config.dev.algorithm, key)
-	var crypted = cipher.update(text, 'utf8', 'hex')
+	let cipher = crypto.createCipher(config.dev.algorithm, key)
+	let crypted = cipher.update(text, 'utf8', 'hex')
 	crypted += cipher.final('hex')
 	return crypted
+}
+
+const decrypt = function(cipher,key){
+	let decipher = crypto.createDecipher(config.dev.algorithm,key)
+	let dec = decipher.update(cipher,'hex','utf8')
+	dec += decipher.final('utf8');
+	return dec;
+
 }
 
 router.post('/gen', async function(req, res) {
@@ -62,6 +72,27 @@ router.post('/gen', async function(req, res) {
 		await textdata.save()
 		return res.json({ msg: 'Saved', secretKey: keydata._id })
 	} catch (err) {
+		console.log(err)
+		return res.status(503).json({ err: 'Server error', status: 503 })
+	}
+})
+
+router.post('/update', async function(req,res){
+	const secretKey = req.body.secretKey
+	if (!mongoose.Types.ObjectId.isValid(secretKey)){
+		return res.status(403).json({err:"Invalid key",status:403})
+	}
+	try{
+		const text = await TextDoc.findOne({secret:secretKey})
+		const key = await KeyDoc.findById(secretKey)
+		if(!text || !key){
+			return res.status(403).json({err:"No data associated with this key",status:403})
+		}
+		const cred = decrypt(text["encrypted"],key["encryptionkey"])
+	
+		return res.json({credentials:cred,owner:text.owner,property:text.property,machines:text.machines})
+
+	}catch(err){
 		console.log(err)
 		return res.status(503).json({ err: 'Server error', status: 503 })
 	}
