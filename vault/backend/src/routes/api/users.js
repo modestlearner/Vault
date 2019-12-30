@@ -76,7 +76,7 @@ router.post('/signin',async function(req,res){
 })
 
 router.post('/signin/demo',async function(req,res){
-    const {username,email,password} = req.body
+    const {username,email,phone} = req.body
 
     try{
         const payload = {

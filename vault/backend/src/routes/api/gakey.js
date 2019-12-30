@@ -2,8 +2,10 @@ const otplib = require('otplib')
 const express = require('express')
 const router = express.Router()
 
+const jwtVerify = require('../../middleware/jwtverify')
 
-router.post('/',async function(req,res){
+
+router.post('/',jwtVerify,async function(req,res){
     const secret = 'qwertyuiopasdfghjkl';
     try{
         const isValid = otplib.authenticator.check(req.body.otp, secret);

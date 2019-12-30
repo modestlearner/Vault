@@ -25,7 +25,7 @@ const decrypt = function(cipher,key){
 
 }
 
-router.post('/gen', async function(req, res) {
+router.post('/gen',jwtVerify,async function(req, res) {
 	const { credentials, owner, property } = req.body
 	let machines = req.body.machines.split(',')
     let encryptKey = await shortid.generate()
@@ -44,7 +44,7 @@ router.post('/gen', async function(req, res) {
 			return res.status(403).json({ err: 'Key already exists', status: 403 })
 		}
 		const toBeUpdated = await TextDoc.findOne({secret:req.body.secretKey})
-		let encrypted = await encrypt(credentials, encryptKey)
+		let encrypted = encrypt(credentials, encryptKey)
 		if(toBeUpdated){
 			await TextDoc.findOneAndUpdate(
 				{secret:req.body.secretKey},
@@ -77,7 +77,7 @@ router.post('/gen', async function(req, res) {
 	}
 })
 
-router.post('/update', async function(req,res){
+router.post('/update',jwtVerify,async function(req,res){
 	const secretKey = req.body.secretKey
 	if (!mongoose.Types.ObjectId.isValid(secretKey)){
 		return res.status(403).json({err:"Invalid key",status:403})

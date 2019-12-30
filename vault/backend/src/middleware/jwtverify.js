@@ -5,7 +5,7 @@ const jwtsecret = config.dev.jwtSecret
 
 const verifyToken = function(req,res,next){
 
-    const token = req.headers('x-auth-token')
+    const token = req.header('x-auth-token')
     if(!token){
         return res.status(401).json({err:"Token missing",status:401})
     }
