@@ -33,7 +33,21 @@ router.post('/gen', async function(req, res) {
 		if (isPresent) {
 			return res.status(403).json({ err: 'Key already exists', status: 403 })
 		}
-        let encrypted = await encrypt(credentials, encryptKey)
+		const toBeUpdated = await TextDoc.findOne({secret:req.body.secretKey})
+		let encrypted = await encrypt(credentials, encryptKey)
+		if(toBeUpdated){
+			await TextDoc.findOneAndUpdate(
+				{secret:req.body.secretKey},
+				{$set:{encrypted,machines}},
+				{new:true}
+			)
+			await KeyDoc.findOneAndUpdate(
+				{_id:req.body.secretKey},
+				{$set:{encryptionkey:encryptKey}},
+				{new:true}
+			)
+			return res.json({msg:"Info updated sucessfully",secretKey:req.body.secretKey})
+		}
 		let textdata = new TextDoc({
 			owner,
 			property,
