@@ -8,9 +8,8 @@ const vaultStatus = require('../../middleware/vaultStatus')
 
 
 router.post('/',[jwtVerify,vaultStatus],async function(req,res){
-    const secret = 'qwertyuiopasdfghjkl';
     try{
-        const isValid = otplib.authenticator.check(req.body.otp, secret);
+        const isValid = otplib.authenticator.check(req.body.otp, process.env.GA_SECRET);
         if(!isValid){
             return res.status(401).json({err:"Invalid OTP",status:401,valid:false})
         }
