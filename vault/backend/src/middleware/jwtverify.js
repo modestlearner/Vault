@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
-const config = require('../configurations/config.js')
 
-const jwtsecret = config.dev.jwtSecret
+const jwtsecret = process.env.JWT_SECRET
 
 const verifyToken = function(req,res,next){
 

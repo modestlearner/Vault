@@ -1,6 +1,5 @@
 const express = require('express')
 const connDB = require('./configurations/db')
-
 const app = express()
 
 

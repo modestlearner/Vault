@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 
-const config = require('./config.js')
-
-const db = config.dev.mongoURI
+const db = process.env.MONGOURI
 
 const connectDB=()=>mongoose.connect(db,{ useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex:true,useFindAndModify:false }).then(()=>{
     console.log("DB connected")

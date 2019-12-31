@@ -9,17 +9,16 @@ const jwtVerify = require('../../middleware/jwtverify')
 const vaultStatus = require('../../middleware/vaultStatus')
 const TextDoc = require('../../models/TextDoc')
 const KeyDoc = require('../../models/KeyDoc')
-const config = require('../../configurations/config')
 
 const encrypt = function(text, key) {
-	let cipher = crypto.createCipher(config.dev.algorithm, key)
+	let cipher = crypto.createCipher(process.env.ALGORITHM, key)
 	let crypted = cipher.update(text, 'utf8', 'hex')
 	crypted += cipher.final('hex')
 	return crypted
 }
 
 const decrypt = function(cipher,key){
-	let decipher = crypto.createDecipher(config.dev.algorithm,key)
+	let decipher = crypto.createDecipher(process.env.ALGORITHM,key)
 	let dec = decipher.update(cipher,'hex','utf8')
 	dec += decipher.final('utf8');
 	return dec;

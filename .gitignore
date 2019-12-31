@@ -4,7 +4,8 @@
 
 ### ExpressionEngine ###
 .DS_Store
-
+dev.env
+prod.env
 # Images
 images/avatars/
 images/captchas/

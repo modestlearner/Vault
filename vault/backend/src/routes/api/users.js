@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
-const config = require('../../configurations/config')
 const bcrypt = require('bcrypt')
 
 const UserDoc = require('../../models/UsersDoc')
@@ -33,7 +32,7 @@ router.post('/signup',async function(req,res){
                 id:user.id
             }
         }
-        jwt.sign(payload,config.dev.jwtSecret,{expiresIn:'7d'},function(err,token){
+        jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'7d'},function(err,token){
             if(err){
                 throw err
             }
@@ -65,7 +64,7 @@ router.post('/signin',async function(req,res){
                 id:user.id
             }
         }
-        jwt.sign(payload,config.dev.jwtSecret,{expiresIn:'7d'},function(err,token){
+        jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'7d'},function(err,token){
             if(err){
                 throw err
             }
@@ -85,7 +84,7 @@ router.post('/signin/demo',vaultStatus,async function(req,res){
             username,
             email
         }
-        jwt.sign(payload,config.dev.jwtSecret,{expiresIn:'7d'},function(err,token){
+        jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'7d'},function(err,token){
             if(err){
                 throw err
             }
