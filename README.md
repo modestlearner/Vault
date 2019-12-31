@@ -11,8 +11,8 @@ It uses a JWT and Google Authenticator to protect the vault from intruders.
 Make sure you have [Node.js](http://nodejs.org/) installed.
 
 ```sh
-git clone https://github.com/modestlearner/Vault.git # or clone your own fork
-cd vault
+git clone https://github.com/modestlearner/Vault.git 
+cd Vault/vault/backend
 npm install
 npm run dev # for dev environment
 ```
