@@ -1,0 +1,162 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Vault",
+		"_postman_id": "e2741d8f-a4bd-d632-0b7a-68251cce9bc2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Unseal Vault",
+			"request": {
+				"url": "http://localhost:9000/api/unseal",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"key1\":\"harshit\",\n\t\"key2\":\"jain\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Check vault status",
+			"request": {
+				"url": "http://localhost:9000/api/unseal/status",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Sign in module",
+			"request": {
+				"url": "http://localhost:9000/api/user/signin/demo",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"harshit\",\n\t\"email\":\"hj@gmail.com\",\n\t\"password\":\"123\"\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GA api",
+			"request": {
+				"url": "http://localhost:9000/api/ga",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcnNoaXQiLCJlbWFpbCI6ImhqQGdtYWlsLmNvbSIsImlhdCI6MTU3NzY5NDIxNywiZXhwIjoxNTc4Mjk5MDE3fQ.HJOgPAokRS0sY0IB2xig6OaBGpLTS2sNaIuJzYcWqz4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"otp\":\"70665812\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Generate cipher for app info",
+			"request": {
+				"url": "http://localhost:9000/api/app/gen",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcnNoaXQiLCJlbWFpbCI6ImhqQGdtYWlsLmNvbSIsImlhdCI6MTU3NzY5NDIxNywiZXhwIjoxNTc4Mjk5MDE3fQ.HJOgPAokRS0sY0IB2xig6OaBGpLTS2sNaIuJzYcWqz4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"credentials\":\"@ABCD\",\n\t\"owner\":\"test\",\n\t\"property\":\"test123\",\n\t\"machines\":\"localhost,192,100\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update app info",
+			"request": {
+				"url": "http://localhost:9000/api/app/gen",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcnNoaXQiLCJlbWFpbCI6ImhqQGdtYWlsLmNvbSIsImlhdCI6MTU3NzY5NDIxNywiZXhwIjoxNTc4Mjk5MDE3fQ.HJOgPAokRS0sY0IB2xig6OaBGpLTS2sNaIuJzYcWqz4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"credentials\":\"@ABCDEF\",\n\t\"machines\":\"localhost,192,100\",\n\t\"secretKey\": \"5e0b623c8b87b3a409a6302f\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get plain text using cipher",
+			"request": {
+				"url": "http://localhost:9000/api/app/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcnNoaXQiLCJlbWFpbCI6ImhqQGdtYWlsLmNvbSIsImlhdCI6MTU3NzY5NDIxNywiZXhwIjoxNTc4Mjk5MDE3fQ.HJOgPAokRS0sY0IB2xig6OaBGpLTS2sNaIuJzYcWqz4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"secretKey\":\"5e0b623c8b87b3a409a6302f\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
