@@ -3,6 +3,8 @@ const express = require('express')
 const router = express.Router()
 
 const jwtVerify = require('../../middleware/jwtverify')
+const vaultStatus = require('../../middleware/vaultStatus')
+
 
 
 router.post('/',[jwtVerify,vaultStatus],async function(req,res){

@@ -1,35 +1,36 @@
 const express = require('express')
 const crypto = require('crypto')
 
+let globals = require('../../configurations/globals')
+
 const router = express.Router()
 
 
 router.post('/',async function(req,res){
     let msg=""
     try{
-        if(req.body.key1!=undefined && key1==null){
-            key1 = req.body.key1
-            sa = true
+        if(req.body.key1!=undefined && globals.key1==null){
+            globals.key1 = req.body.key1
+            globals.sa = true
             msg="SA team has entered the key"
         }
-        if(req.body.key2!=undefined && key2==null){
-            key2 = req.body.key2
-            db = true
+        if(req.body.key2!=undefined && globals.key2==null){
+            globals.key2 = req.body.key2
+            globals.db = true
             msg = "DB team has entered the key"
         }
-        if(key1!=null && key2!=null){
-            let combinedText = key1+key2
-            console.log(combinedText)
+        if(globals.key1!=null && globals.key2!=null){
+            let combinedText = globals.key1+globals.key2
             if(combinedText=='harshitjain'){
-                unseal = true
+                globals.unseal = true
                 msg="Correct keys"
             }else{
-                sa=false, db=false, unseal = false
-                key1=null, key2=null
-                return res.status(403).json({err:"Keys Mismatch",status:403,unseal})
+                globals.sa=false, globals.db=false, globals.unseal = false
+                globals.key1=null, globals.key2=null
+                return res.status(403).json({err:"Keys Mismatch",status:403,unseal:globals.unseal})
             }
         }
-        return res.json({msg,unseal})
+        return res.json({msg,unseal:globals.unseal})
     }catch(err){
         console.log(err)
         res.status(503).json({err:"Server error",status:503})
@@ -38,11 +39,11 @@ router.post('/',async function(req,res){
 
 router.get('/status',async function(req,res){
     try{
-        if(unseal == true){
+        if(globals.unseal == true){
             return res.json({msg:"Vault Unsealed",status:200,vaultStatus:3})
-        }else if(sa==true){
+        }else if(globals.sa==true){
             return res.json({msg:"Vault Partially Unsealed",status:200,vaultStatus:1})
-        }else if (db==true){
+        }else if (globals.db==true){
             return res.json({msg:"Vault Partially Unsealed",status:200,vaultStatus:2})
         }else{
             return res.json({msg:"Vault Sealed",status:200,vaultStatus:0})

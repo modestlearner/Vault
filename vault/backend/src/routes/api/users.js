@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt')
 
 const UserDoc = require('../../models/UsersDoc')
 const jwtVerify = require('../../middleware/jwtverify')
+const vaultStatus = require('../../middleware/vaultStatus')
+
 
 router.post('/signup',async function(req,res){
 
