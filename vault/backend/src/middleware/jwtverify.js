@@ -10,7 +10,8 @@ const verifyToken = function(req,res,next){
     }
     try{
         const decoded = jwt.verify(token,jwtsecret)
-        req.user = decoded.user
+        req.username = decoded.username
+        req.email = decoded.email
         next()
     }catch(err){
         console.log(err)

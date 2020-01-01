@@ -157,6 +157,23 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "Get profile",
+			"request": {
+				"url": "http://localhost:9000/api/user/profile",
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcnNoaXQiLCJlbWFpbCI6ImhqQGdtYWlsLmNvbSIsImlhdCI6MTU3Nzg2MzIyOSwiZXhwIjoxNTc4NDY4MDI5fQ.9g2s8bGNrKTbcnzkJODoW6E4zok3LLdwIxUaP4SDxZ8",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

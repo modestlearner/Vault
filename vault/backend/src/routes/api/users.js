@@ -94,8 +94,16 @@ router.post('/signin/demo',vaultStatus,async function(req,res){
         console.log(err)
         res.status(503).json({err:"Server error",status:503})
     }
+})
 
+router.get('/profile',[vaultStatus,jwtVerify],async function(req,res){
+    try{
+        return res.json({email:req.email,username:req.username})
 
+    }catch(err){
+        console.log(err)
+        res.status(503).json({err:"Server Error",status:503})
+    }
 })
 
 module.exports = router
