@@ -1,4 +1,4 @@
-# Vault
+# Vault  
 
 Vault is a Secret management and distribution application which uses a symmetrical encryption algorithm to encrypt credentials and also needs machine IP addresses for whitelisting purposes.
 
