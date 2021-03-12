@@ -2,7 +2,7 @@
 
 Vault is a Secret management and distribution application which uses a symmetrical encryption algorithm to encrypt credentials and also needs machine IP addresses for whitelisting purposes.
 
-It uses a JWT and Google Authenticator (GA) to protect the vault from intruders.
+It uses a JWT and Google Authenticator ( GA ) to protect the vault from intruders.
 
 
 
